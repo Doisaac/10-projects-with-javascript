@@ -1,0 +1,108 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bard-color-brand-text-gradient-stop-1: #4285f4;
+  --bard-color-brand-text-gradient-stop-2: #9b72cb;
+  --bard-color-brand-text-gradient-stop-3: #d96570;
+  --bard-color-brand-text-gradient-stop-3: #d96570;
+  --bard-color-brand-text-gradient-stop-2: #9b72cb;
+  --bard-color-brand-text-gradient-stop-1: #4285f4;
+  --bard-color-brand-text-gradient-stop-2: #9b72cb;
+  --bard-color-brand-text-gradient-stop-3: #d96570;
+  --bard-color-surface: #131314;
+}
+
+body {
+  background-color: #131314;
+}
+
+.app {
+  background-color: #fff;
+  width: 500px;
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+.app__time {
+  text-align: center;
+  padding: 20px 0px;
+}
+
+.app__value {
+  color: transparent;
+  font-size: 48px;
+  font-weight: bold;
+  background: linear-gradient(
+    74deg,
+    var(--bard-color-brand-text-gradient-stop-1) 0,
+    var(--bard-color-brand-text-gradient-stop-2) 9%,
+    var(--bard-color-brand-text-gradient-stop-3) 20%,
+    var(--bard-color-brand-text-gradient-stop-3) 24%,
+    var(--bard-color-brand-text-gradient-stop-2) 35%,
+    var(--bard-color-brand-text-gradient-stop-1) 44%,
+    var(--bard-color-brand-text-gradient-stop-2) 50%,
+    var(--bard-color-brand-text-gradient-stop-3) 56%,
+    var(--bard-color-surface) 75%,
+    var(--bard-color-surface) 100%
+    );
+  display: inline-block;
+  position: relative;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+.form {
+  text-align: center;
+}
+
+input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  width: 300px;
+}
+
+button, 
+input[type="submit"] {
+  border: none;
+  background-color: #003366;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.app__container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px
+}
+
+.app__tasks {
+  margin-top: 20px;
+  width: 83%;
+  max-width: 83%;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 15px;
+}
+
+.done {
+  border: none;
+  background-color: #1ed760;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
