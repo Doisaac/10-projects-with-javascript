@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #31363F;
+}
+
+.rating {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.item {
+  background-color: rgb(198, 198, 198);
+  mask-image: url(star.svg);
+  -webkit-mask-image: url(star.svg);
+  width: 50px;
+  height: 49px;
+  cursor: pointer;
+}
+
+.item-full {
+  background-color: rgb(255, 255, 89);
+}
