@@ -27,6 +27,7 @@ function addEvent() {
   }
 
   if (dateDiff(eventDate.value) < 0) {
+    alert("Invalid Date")
     return
   }
 
