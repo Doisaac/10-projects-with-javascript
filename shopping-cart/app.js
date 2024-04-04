@@ -165,8 +165,46 @@ function renderShoppingCart() {
   `
 
   const shoppingCartContainer = document.querySelector('#shopping-cart-container')
+
+  shoppingCartContainer.classList.remove('hide')
+  shoppingCartContainer.classList.add('show')
+
+
   shoppingCartContainer.innerHTML = closeButton + html.join('') + totalContainer + purchaseButton
 
+  document.querySelectorAll('.addOne').forEach((button) => {
+    button.addEventListener('click', (e) => {
+      const id = parseInt(button.getAttribute('data-id'))
+      shoppingCart.methods.add(id, 1)
+      renderShoppingCart()
+    })
+  })
+
+  document.querySelectorAll('.removeOne').forEach((button) => {
+    button.addEventListener('click', (e) => {
+      const id = parseInt(button.getAttribute('data-id'))
+      shoppingCart.methods.remove(id, 1)
+      renderShoppingCart()
+    })
+  })
+
+  document.querySelectorAll('.bClose').forEach((button) => {
+    button.addEventListener('click', (e) => {
+      shoppingCartContainer.classList.remove('show')
+      shoppingCartContainer.classList.add('hide')
+    })
+  })
+
+  const bPurchase = document.querySelectorAll('#bPurchase')
+  if (bPurchase) {
+    bPurchase.forEach((button) => {
+      button.addEventListener('click', (e) => {
+        shoppingCart.methods.purchase()
+        renderStore()
+        renderShoppingCart()
+      })
+    })
+  }
 }
 
 function numberToCurrency(number) {
