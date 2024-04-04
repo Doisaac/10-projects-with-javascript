@@ -65,21 +65,19 @@ const shoppingCart = {
       }
     },
     count: () => {
-      return shoppingCart.items.reduce((acc, item) => {
-        return acc.qty + item.qty
-      }, 0)
+      return shoppingCart.items.reduce((acc, item) => acc + item.qty, 0)
     },
     get: (id) => {
       const index = shoppingCart.items.findIndex(item => item.id === id)
       return index >= 0 ? shoppingCart.items[index] : null
     },
     getTotal: () => {
-      let total = shoppingCart.reduce((acc, item) => {
+      let total = 0;
+      shoppingCart.items.forEach((item) => {
         const found = db.methods.find(item.id)
-        return acc + found.price * item.qty
-      }, 0)
-
-      return total
+        total += found.price * item.qty
+      })
+      return total;
     },
     hasInventory: (id, qty) => {
       return db.items.find(item => item.id === id).qty - qty >= 0
@@ -99,7 +97,7 @@ function renderStore() {
       <div class="item">
         <div class="title">${item.title}</div>
         <div class="price">${numberToCurrency(item.price)}</div>
-        <div class="qty">${item.qty}</div>
+        <div class="qty">${item.qty} units</div>
 
         <div class="actions">
           <button class="add" data-id="${item.id}">
@@ -110,7 +108,7 @@ function renderStore() {
     `
   })
   document.querySelector('#store-container').innerHTML = html.join("")
-  
+
   document.querySelectorAll('.item .actions .add').forEach((btn) => {
     btn.addEventListener('click', (e) => {
       const id = parseInt(btn.getAttribute('data-id'))
@@ -129,6 +127,45 @@ function renderStore() {
 }
 
 function renderShoppingCart() {
+  const html = shoppingCart.items.map((item) => {
+    const dbItem = db.methods.find(item.id)
+    return `
+      <div class="item">
+        <div class="title">${dbItem.title}</div>
+        <div class="price">${numberToCurrency(dbItem.price)}</div>
+        <div class="qty">${item.qty} units</div>
+        <div class="subtotal">
+          Subtotal: ${numberToCurrency(item.qty * dbItem.price)}
+        </div>
+        <div class="actions">
+          <button class="addOne" data-id="${item.id}">+</button>
+          <button class="removeOne" data-id="${item.id}">-</button>
+        </div>
+      </div>
+    `
+  })
+
+  const closeButton = `
+    <div class="cart-header">
+      <button class="bClose">Close</button>
+    </div>
+  `
+
+  const purchaseButton = shoppingCart.items.length > 0 ? `
+    <div class="cart-actions">
+      <button id="bPurchase">Purchase</button>
+    </div>
+  ` : ''
+
+  const total = shoppingCart.methods.getTotal()
+  const totalContainer = `
+    <div class="total">
+      Total: ${numberToCurrency(total)}
+    </div>
+  `
+
+  const shoppingCartContainer = document.querySelector('#shopping-cart-container')
+  shoppingCartContainer.innerHTML = closeButton + html.join('') + totalContainer + purchaseButton
 
 }
 
